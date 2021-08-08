@@ -2,11 +2,11 @@
 #include "Application.h"
 
 #ifdef RDX_PLATFORM_WIN
-	extern RDX::Application* RDX::CreateApp();
+	extern rdx::Application* rdx::CreateApp();
 
 	int main()
 	{
-		auto app = RDX::CreateApp();
+		auto app = rdx::CreateApp();
 		app->Run();
 		delete app;
 	}

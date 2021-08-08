@@ -1,35 +1,15 @@
 #pragma once
+#include "rdxpch.h"
 #include "Core.h"
 
-#include <functional>
-#include <list>
-#include <iostream>
-
-namespace RDX
+namespace rdx
 {
-	struct RDX_API EventParams
-	{
-	};
-
-	class RDX_API Event
+	template <typename T>
+	class Event
 	{
 	public:
 		Event() {}
 		virtual~Event() {}
-	public:
-		void Invoke();
-		void AddListener(std::function<void()> callback);
-		void RemoveListeners();
-	private:
-		std::list<std::function<void()>> m_listeners;
-	};
-
-	template <typename T>
-	class CustomEvent
-	{
-	public:
-		CustomEvent() {}
-		virtual~CustomEvent() {}
 	public:
 		void Invoke(T params) 
 		{
@@ -48,5 +28,31 @@ namespace RDX
 		}
 	private:
 		std::list<std::function<void(T)>> m_listeners;
+	};
+
+	template <>
+	class Event<void>
+	{
+	public:
+		Event() {}
+		virtual~Event() {}
+	public:
+		void Invoke()
+		{
+			for (auto callback : m_listeners)
+			{
+				callback();
+			}
+		}
+		void AddListener(std::function<void()> callback)
+		{
+			m_listeners.emplace_back(callback);
+		}
+		void RemoveListeners()
+		{
+			m_listeners.clear();
+		}
+	private:
+		std::list<std::function<void()>> m_listeners;
 	};
 }

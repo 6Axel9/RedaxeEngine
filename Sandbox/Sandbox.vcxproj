@@ -47,15 +47,15 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)temp\$(Configuration)\$(ProjectName)\</IntDir>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Redaxe\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Redaxe\Include;$(SolutionDir)vendor\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)vendor\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)temp\$(Configuration)\$(ProjectName)\</IntDir>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Redaxe\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Redaxe\Include;$(SolutionDir)vendor\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)vendor\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

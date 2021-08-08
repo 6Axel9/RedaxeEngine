@@ -1,7 +1,7 @@
 #pragma once
 #include "Core.h"
 
-namespace RDX
+namespace rdx
 {
 	class RDX_API Application
 	{

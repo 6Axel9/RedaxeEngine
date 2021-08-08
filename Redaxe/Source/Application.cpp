@@ -1,6 +1,7 @@
+#include "rdxpch.h"
 #include "Application.h"
 
-namespace RDX
+namespace rdx
 {
 	Application::Application()
 	{
