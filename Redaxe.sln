@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Redaxe", "Redaxe\Redaxe.vcxproj", "{173B2C43-A5B7-46A2-BD9F-BAA951B3278F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox", "Sandbox\Sandbox.vcxproj", "{4230D653-8475-47C1-AD3B-D1E1A1A303A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{173B2C43-A5B7-46A2-BD9F-BAA951B3278F}.Debug|x64.ActiveCfg = Debug|x64
+		{173B2C43-A5B7-46A2-BD9F-BAA951B3278F}.Debug|x64.Build.0 = Debug|x64
+		{173B2C43-A5B7-46A2-BD9F-BAA951B3278F}.Release|x64.ActiveCfg = Release|x64
+		{173B2C43-A5B7-46A2-BD9F-BAA951B3278F}.Release|x64.Build.0 = Release|x64
+		{4230D653-8475-47C1-AD3B-D1E1A1A303A2}.Debug|x64.ActiveCfg = Debug|x64
+		{4230D653-8475-47C1-AD3B-D1E1A1A303A2}.Debug|x64.Build.0 = Debug|x64
+		{4230D653-8475-47C1-AD3B-D1E1A1A303A2}.Release|x64.ActiveCfg = Release|x64
+		{4230D653-8475-47C1-AD3B-D1E1A1A303A2}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2361BBC3-3F0F-417D-85C0-144010DD05BB}
+	EndGlobalSection
+EndGlobal
