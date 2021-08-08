@@ -9,7 +9,7 @@ namespace RDX
 		Application();
 		virtual~Application();
 	public:
-		void Init();
+		void Run();
 	};
 
 	Application* CreateApp();

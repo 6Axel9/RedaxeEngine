@@ -4,11 +4,27 @@
 class App : public RDX::Application
 {
 public:
-	App() { std::cout << "Created App Succesfully"; }
-	~App() {}
+	App() { }
+	~App() { }
+public:
+	RDX::Event OnStart;
+	RDX::CustomEvent<int> OnStart2;
 };
 
 RDX::Application* RDX::CreateApp()
 {
-	return new App;
+	App* sandbox = new App;
+	sandbox->OnStart.AddListener([]() { std::cout << "Started1\n"; });
+	sandbox->OnStart.AddListener([]() { std::cout << "Started1\n"; });
+	sandbox->OnStart.AddListener([]() { std::cout << "Started1\n"; });
+	sandbox->OnStart.AddListener([]() { std::cout << "Started1\n"; });
+	sandbox->OnStart.AddListener([]() { std::cout << "Started1\n"; });
+
+	sandbox->OnStart2.AddListener([](int value) { std::cout << "StartedWithParam" << value << "\n"; });
+	sandbox->OnStart2.AddListener([](int value) { std::cout << "StartedWithParam" << value << "\n"; });
+	sandbox->OnStart2.AddListener([](int value) { std::cout << "StartedWithParam" << value << "\n"; });
+
+	sandbox->OnStart.Invoke();
+	sandbox->OnStart2.Invoke(5);
+	return sandbox;
 }

@@ -15,9 +15,11 @@
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Core.h" />
     <ClInclude Include="Source\Entry.h" />
+    <ClInclude Include="Source\Event.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\Event.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

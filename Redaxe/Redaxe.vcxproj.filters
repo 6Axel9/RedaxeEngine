@@ -8,9 +8,6 @@
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{38c6660a-e361-403b-ba4c-96a08406cb49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Include">
-      <UniqueIdentifier>{a8d9ba66-6da2-448a-92a4-872a2d8c1fdf}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core.h">
@@ -19,15 +16,21 @@
     <ClInclude Include="Source\Application.h">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Redaxe.h">
-      <Filter>Source Files\Include</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Entry.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Redaxe.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Event.h">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Event.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>

@@ -10,7 +10,7 @@ namespace RDX
 	{
 	}
 
-	void Application::Init()
+	void Application::Run()
 	{
 		while (true) {}
 	}
