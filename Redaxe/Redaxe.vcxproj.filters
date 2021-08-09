@@ -11,36 +11,51 @@
     <Filter Include="Source Files\Utilities">
       <UniqueIdentifier>{61bab658-7ca6-4068-9624-d1afcf1aeab1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{db7c05ca-a3a7-4d7a-a1fd-a95aaabfbb51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Libraries">
+      <UniqueIdentifier>{7a718529-112f-4b0c-a29b-0c66be908607}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Events">
+      <UniqueIdentifier>{987950c6-02dd-472b-a4a6-adfd0372fcb6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core.h">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Application.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Entry.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Redaxe.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Event.h">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\rdxpch.h">
       <Filter>Source Files\Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Redaxe.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Event.h">
+      <Filter>Source Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Application.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Window.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Application.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\rdxpch.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="Source\glad.cpp">
-      <Filter>Source Files\Utilities</Filter>
+      <Filter>Source Files\Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Window.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

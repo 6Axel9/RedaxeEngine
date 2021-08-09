@@ -7,7 +7,9 @@
 	int main()
 	{
 		auto app = rdx::CreateApp();
-		app->Run();
+		app->Start();
+		app->Update();
+		app->End();
 		delete app;
 	}
 #endif

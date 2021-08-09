@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.h"
+#include "Window.h"
 
 namespace rdx
 {
@@ -9,7 +10,11 @@ namespace rdx
 		Application();
 		virtual~Application();
 	public:
-		void Run();
+		void Start();
+		void Update();
+		void End();
+	private:
+		Window* m_window;
 	};
 
 	Application* CreateApp();

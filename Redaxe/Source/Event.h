@@ -1,6 +1,5 @@
 #pragma once
 #include "rdxpch.h"
-#include "Core.h"
 
 namespace rdx
 {
@@ -13,7 +12,7 @@ namespace rdx
 	public:
 		void Invoke(T params) 
 		{
-			for (auto callback : m_listeners)
+			for (std::function<void(T)>& callback : m_listeners)
 			{
 				callback(params);
 			}
@@ -39,7 +38,7 @@ namespace rdx
 	public:
 		void Invoke()
 		{
-			for (auto callback : m_listeners)
+			for (std::function<void()>& callback : m_listeners)
 			{
 				callback();
 			}

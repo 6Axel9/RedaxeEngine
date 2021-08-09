@@ -19,5 +19,6 @@
 	#include <Windows.h>
 #endif
 
+#include "spdlog/spdlog.h"
 #include "glad/glad.h"
 #include "glfw/glfw3.h"

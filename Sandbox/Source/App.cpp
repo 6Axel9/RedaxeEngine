@@ -1,11 +1,11 @@
 #include <iostream>
-#include <Redaxe.h>
+#include "Redaxe.h"
 
 class App : public rdx::Application
 {
 public:
-	App() { }
-	~App() { }
+	App() {}
+	~App() {}
 };
 
 rdx::Application* rdx::CreateApp()
