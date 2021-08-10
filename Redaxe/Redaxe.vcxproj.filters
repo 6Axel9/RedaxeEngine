@@ -1,61 +1,48 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="include">
+      <UniqueIdentifier>{89AF369E-F58E-B539-FEA6-40106A051C9B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core">
-      <UniqueIdentifier>{38c6660a-e361-403b-ba4c-96a08406cb49}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Utilities">
-      <UniqueIdentifier>{61bab658-7ca6-4068-9624-d1afcf1aeab1}</UniqueIdentifier>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{C55F2ECF-B12C-89DA-DA45-7782C671BE68}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Components">
-      <UniqueIdentifier>{db7c05ca-a3a7-4d7a-a1fd-a95aaabfbb51}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Libraries">
-      <UniqueIdentifier>{7a718529-112f-4b0c-a29b-0c66be908607}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Events">
-      <UniqueIdentifier>{987950c6-02dd-472b-a4a6-adfd0372fcb6}</UniqueIdentifier>
+    <Filter Include="src\platform">
+      <UniqueIdentifier>{41663D6D-2DC9-CC11-D64E-05C8C2909894}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Core.h">
-      <Filter>Source Files\Core</Filter>
+    <ClInclude Include="include\Redaxe.h">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Entry.h">
-      <Filter>Source Files\Core</Filter>
+    <ClInclude Include="src\core\Entry.h">
+      <Filter>src\core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\rdxpch.h">
-      <Filter>Source Files\Utilities</Filter>
+    <ClInclude Include="src\core\Event.h">
+      <Filter>src\core</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Redaxe.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="src\platform\Application.h">
+      <Filter>src\platform</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Event.h">
-      <Filter>Source Files\Events</Filter>
+    <ClInclude Include="src\platform\Window.h">
+      <Filter>src\platform</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Application.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Window.h">
-      <Filter>Source Files\Components</Filter>
+    <ClInclude Include="src\rdxpch.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\rdxpch.cpp">
-      <Filter>Source Files\Utilities</Filter>
+    <ClCompile Include="src\platform\Application.cpp">
+      <Filter>src\platform</Filter>
     </ClCompile>
-    <ClCompile Include="Source\glad.cpp">
-      <Filter>Source Files\Libraries</Filter>
+    <ClCompile Include="src\platform\Window.cpp">
+      <Filter>src\platform</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Application.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Window.cpp">
-      <Filter>Source Files\Components</Filter>
+    <ClCompile Include="src\rdxpch.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
