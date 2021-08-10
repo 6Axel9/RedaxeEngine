@@ -3,7 +3,8 @@
 
 namespace rdx
 {
-	Application::Application() : m_window(0), m_hasEnded(0)
+	Application::Application() 
+		: m_window(0), m_hasEnded(0)
 	{
 		m_window = new Window(WindowData());
 	}
@@ -15,6 +16,7 @@ namespace rdx
 
 	void Application::Update()
 	{
+		m_window->BindCallbacks();
 		while (!m_window->HasClosed() && !m_hasEnded)
 		{
 			m_window->UpdateInputs();

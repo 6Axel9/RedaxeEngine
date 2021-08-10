@@ -1,8 +1,15 @@
 #pragma once
 #include "rdxpch.h"
 
+#define Action(x) std::function<void(x)>
+
 namespace rdx
 {
+	struct EventData
+	{
+		virtual std::string ToString() = 0;
+	};
+
 	template <typename T>
 	class Event
 	{
@@ -12,12 +19,13 @@ namespace rdx
 	public:
 		void Invoke(T params) 
 		{
-			for (std::function<void(T)>& callback : m_listeners)
+			std::cout << "[Event]" << params.ToString() << "\n";
+			for (const Action(T)& callback : m_listeners)
 			{
 				callback(params);
 			}
 		}
-		void AddListener(std::function<void(T)> callback) 
+		void AddListener(const Action(T)& callback) 
 		{
 			m_listeners.emplace_back(callback); 
 		}
@@ -26,7 +34,7 @@ namespace rdx
 			m_listeners.clear(); 
 		}
 	private:
-		std::list<std::function<void(T)>> m_listeners;
+		std::list<Action(T)> m_listeners;
 	};
 
 	template <>
@@ -38,12 +46,13 @@ namespace rdx
 	public:
 		void Invoke()
 		{
-			for (std::function<void()>& callback : m_listeners)
+			std::cout << "[Event][Base]\n";
+			for (const Action()& callback : m_listeners)
 			{
 				callback();
 			}
 		}
-		void AddListener(std::function<void()> callback)
+		void AddListener(const Action()& callback)
 		{
 			m_listeners.emplace_back(callback);
 		}
@@ -52,6 +61,6 @@ namespace rdx
 			m_listeners.clear();
 		}
 	private:
-		std::list<std::function<void()>> m_listeners;
+		std::list<Action()> m_listeners;
 	};
 }

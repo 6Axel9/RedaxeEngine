@@ -33,18 +33,10 @@ namespace rdx
             return;
         }
 
-        GLFWwindowmaximizefun maximizeHandler = [](GLFWwindow* win, int val)
-        {
-            Window* windowPtr = (Window*)glfwGetWindowUserPointer(win);
-            windowPtr->ToggleFullScreen();
-        };
-        glfwSetWindowMaximizeCallback(m_window, maximizeHandler);
-
         Window::m_count++;
         glfwMakeContextCurrent(m_window);
-        glfwSetWindowUserPointer(m_window, this);
-        gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         glfwSwapInterval(m_windowData.hasVsync ? 1 : 0);
+        gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     }
 
     Window::~Window()
@@ -59,11 +51,6 @@ namespace rdx
     void Window::UpdateInputs()
     {
         glfwPollEvents();
-    }
-
-    void Window::SetF(GLFWwindow* win, int value)
-    {
-        ToggleFullScreen();
     }
 
     void Window::ToggleFullScreen()
@@ -86,6 +73,30 @@ namespace rdx
     void Window::ClearScreen()
     {
         glClear(GL_COLOR_BUFFER_BIT);
+    }
+
+    void Window::BindCallbacks()
+    {
+        glfwSetWindowUserPointer(m_window, &m_windowData);
+
+        glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods) 
+        {
+            WindowData* userPtr = static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+            switch (action)
+            {
+            case GLFW_PRESS:
+                userPtr->keyDownEvent.Invoke(KeyDownData(key));
+                break;
+            case GLFW_RELEASE:
+                userPtr->keyUpEvent.Invoke(KeyUpData(key));
+                break;
+            case GLFW_REPEAT:
+                userPtr->keyHoldEvent.Invoke(KeyHoldData(key));
+                break;
+            default:
+                break;
+            }
+        });
     }
 
     bool Window::HasVsync()

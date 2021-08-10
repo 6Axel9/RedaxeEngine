@@ -1,5 +1,6 @@
 #pragma once
 #include "rdxpch.h"
+#include "events/InputEvents.h"
 
 namespace rdx
 {
@@ -10,6 +11,10 @@ namespace rdx
 		bool hasVsync;
 		int width;
 		int height;
+
+		Event<KeyDownData> keyDownEvent;
+		Event<KeyUpData> keyUpEvent;
+		Event<KeyHoldData> keyHoldEvent;
 	};
 
 	class Window
@@ -21,11 +26,15 @@ namespace rdx
 		~Window();
 	public:
 		void UpdateInputs();
-		void SetF(GLFWwindow* win, int value);
-		void ToggleFullScreen();
-		void ToggleVsync();
 		void SwapBuffer();
 		void ClearScreen();
+		void BindCallbacks();
+		void ToggleFullScreen();
+		void ToggleVsync();
+
+		const Event<KeyDownData>& OnKeyDownEvent() { return m_windowData.keyDownEvent; };
+		const Event<KeyUpData>& OnKeyUpEvent() { return m_windowData.keyUpEvent; };
+		const Event<KeyHoldData>& OnKeyHoldEvent() { return m_windowData.keyHoldEvent; };
 	public:
 		bool HasVsync();
 		bool HasClosed();
