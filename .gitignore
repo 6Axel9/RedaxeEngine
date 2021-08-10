@@ -1,3 +1,9 @@
+# Project and Solution
+*.sln
+*.filters
+*.vcxproj
+*.user
+
 # Prerequisites
 *.d
 
