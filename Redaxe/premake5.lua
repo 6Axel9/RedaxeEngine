@@ -29,13 +29,15 @@ project "Redaxe"
     {
         "src",
         "%{IncludeDir.glad}",
-        "%{IncludeDir.glfw}"
+        "%{IncludeDir.glfw}",
+        "%{IncludeDir.spdlog}"
     }
 
     links
 	{
 		"Glfw",
-        "Glad"
+        "Glad",
+        "Spdlog"
     }
 
     filter "system:windows"

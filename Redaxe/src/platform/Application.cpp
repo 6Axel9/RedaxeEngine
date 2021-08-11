@@ -6,6 +6,8 @@ namespace rdx
 	Application::Application() 
 		: m_window(0), m_hasEnded(0)
 	{
+		spdlog::set_pattern("[%H:%M:%S][%^%l%$] %v");
+
 		m_window = new Window(WindowData());
 	}
 

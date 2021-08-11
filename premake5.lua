@@ -22,6 +22,7 @@ outputVendorDir = "%{cfg.buildcfg}/vendor"
 group "Dependencies"
     include "Redaxe/vendor/Glfw"
     include "Redaxe/vendor/Glad"
+    include "Redaxe/vendor/Spdlog"
 group ""
 
 include "Redaxe"

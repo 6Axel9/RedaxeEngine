@@ -19,7 +19,7 @@ namespace rdx
 	public:
 		void Invoke(T params) 
 		{
-			std::cout << "[Event]" << params.ToString() << "\n";
+			spdlog::info("[Event]{0}", params.ToString());
 			for (const Action(T)& callback : m_listeners)
 			{
 				callback(params);
@@ -46,7 +46,7 @@ namespace rdx
 	public:
 		void Invoke()
 		{
-			std::cout << "[Event][Base]\n";
+			spdlog::info("[Event] [Base]");
 			for (const Action()& callback : m_listeners)
 			{
 				callback();

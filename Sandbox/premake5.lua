@@ -18,7 +18,8 @@ project "Sandbox"
         "%{IncludeDir.redaxe}/include",
         "%{IncludeDir.redaxe}/src",
         "%{IncludeDir.glad}",
-        "%{IncludeDir.glfw}"
+        "%{IncludeDir.glfw}",
+        "%{IncludeDir.spdlog}"
     }
 
     defines 
