@@ -85,13 +85,13 @@ namespace rdx
             switch (action)
             {
             case GLFW_PRESS:
-                userPtr->keyDownEvent.Invoke(KeyDownData(key));
+                userPtr->eventDispatcher.Invoke(KeyDownData(key));
                 break;
             case GLFW_RELEASE:
-                userPtr->keyUpEvent.Invoke(KeyUpData(key));
+                userPtr->eventDispatcher.Invoke(KeyUpData(key));
                 break;
             case GLFW_REPEAT:
-                userPtr->keyHoldEvent.Invoke(KeyHoldData(key));
+                userPtr->eventDispatcher.Invoke(KeyHoldData(key));
                 break;
             default:
                 break;

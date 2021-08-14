@@ -2,122 +2,77 @@
 #include "rdxpch.h"
 #include "Event.h"
 
-#define KEY_DOWN(key)	KeyEvent(key), source(InputSource::Keyboard), state(KeyState::Down)
-#define KEY_UP(key)		KeyEvent(key), source(InputSource::Keyboard), state(KeyState::Up)
-#define KEY_HOLD(key)	KeyEvent(key), source(InputSource::Keyboard), state(KeyState::Hold)
-
-#define MOUSE_DOWN(key)	KeyEvent(key), source(InputSource::Mouse), state(KeyState::Down)
-#define MOUSE_UP(key)	KeyEvent(key), source(InputSource::Mouse), state(KeyState::Up)
-#define MOUSE_HOLD(key)	KeyEvent(key), source(InputSource::Mouse), state(KeyState::Hold)
-
-#define MOUSE_MOVED(x, y) source(InputSource::Mouse), x(x), y(y)
+#define Event_Type(x) EventType GetType() override { return x; }
 
 namespace rdx
 {
-	enum class InputSource { Keyboard, Mouse };
-	enum class KeyState { Down, Up, Hold };
-
 	struct KeyEvent : EventData
 	{
-		KeyEvent(int key) : key(key) {}
+		KeyEvent() : key(0) {}
+		int key;
+	};
+
+	struct MouseEvent : EventData
+	{
+		MouseEvent() : deltaX(0), deltaY(0), scroll(0), x(0), y(0), key(0) {}
+		int deltaX;
+		int deltaY;
+		int scroll;
+		int x, y;
 		int key;
 	};
 
 	struct KeyDownData : KeyEvent
 	{
-		KeyDownData(int key) : KEY_DOWN(key) {}
-		InputSource source;
-		KeyState state;
-
-		std::string ToString() override
-		{
-			std::stringstream ss;
-			ss << "[Keyboard][Key " << key << " was down]";
-			return ss.str();
-		}
+		KeyDownData(int key) { this->key = key; }
+		Event_Type(EventType::KeyDown)
 	};
 
 	struct KeyUpData : KeyEvent
 	{
-		KeyUpData(int key) : KEY_UP(key) {}
-		InputSource source;
-		KeyState state;
-
-		std::string ToString() override
-		{
-			std::stringstream ss;
-			ss << "[Keyboard][Key " << key << " was up]";
-			return ss.str();
-		}
+		KeyUpData(int key) { this->key = key; }
+		Event_Type(EventType::KeyUp)
 	};
 
 	struct KeyHoldData : KeyEvent
 	{
-		KeyHoldData(int key) : KEY_HOLD(key) {}
-		InputSource source;
-		KeyState state;
-
-		std::string ToString() override
-		{
-			std::stringstream ss;
-			ss << "[Keyboard][Key " << key << " was in hold]";
-			return ss.str();
-		}
+		KeyHoldData(int key) { this->key = key; }
+		Event_Type(EventType::KeyHold)
 	};
 
-	struct MouseDownData : KeyEvent
+	struct MouseDownData : MouseEvent
 	{
-		MouseDownData(int key) : MOUSE_DOWN(key) {}
-		InputSource source;
-		KeyState state;
-
-		std::string ToString() override
-		{
-			std::stringstream ss;
-			ss << "[Mouse][Key " << key << " was down]";
-			return ss.str();
-		}
+		MouseDownData(int key) { this->key = key; }
+		Event_Type(EventType::MouseDown)
 	};
 
-	struct MouseUpData : KeyEvent
+	struct MouseUpData : MouseEvent
 	{
-		MouseUpData(int key) : MOUSE_UP(key) {}
-		InputSource source;
-		KeyState state;
-
-		std::string ToString() override
-		{
-			std::stringstream ss;
-			ss << "[Mouse][Key " << key << " was up]";
-			return ss.str();
-		}
+		MouseUpData(int key) { this->key = key; }
+		Event_Type(EventType::MouseUp)
 	};
 
-	struct MouseHoldData : KeyEvent
+	struct MouseHoldData : MouseEvent
 	{
-		MouseHoldData(int key) : MOUSE_HOLD(key) {}
-		InputSource source;
-		KeyState state;
-
-		std::string ToString() override
-		{
-			std::stringstream ss;
-			ss << "[Mouse][Key " << key << " was in hold]";
-			return ss.str();
-		}
+		MouseHoldData(int key) { this->key = key; }
+		Event_Type(EventType::MouseHold)
 	};
 
-	struct MouseMovedData : EventData 
+	struct MouseScrollData : MouseEvent
 	{
-		MouseMovedData(int x, int y) : MOUSE_MOVED(x, y) {}
-		InputSource source;
-		int x, y;
+		MouseScrollData(int scroll) { this->scroll = scroll; }
+		Event_Type(EventType::MouseScroll)
+	};
 
-		std::string ToString() override
+	struct MouseMoveData : MouseEvent
+	{
+		MouseMoveData(int deltaX, int deltaY, int x, int y)
 		{
-			std::stringstream ss;
-			ss << "[Mouse][Moved to x:" << x << " y:" << y << "]";
-			return ss.str();
+			this->deltaX = deltaX;
+			this->deltaY = deltaY;
+			this->x = x;
+			this->y = y;
 		}
+		Event_Type(EventType::MouseMove)
 	};
 }

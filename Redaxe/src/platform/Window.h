@@ -12,9 +12,7 @@ namespace rdx
 		int width;
 		int height;
 
-		Event<KeyDownData> keyDownEvent;
-		Event<KeyUpData> keyUpEvent;
-		Event<KeyHoldData> keyHoldEvent;
+		EventDispatcher eventDispatcher;
 	};
 
 	class Window
@@ -32,9 +30,7 @@ namespace rdx
 		void ToggleFullScreen();
 		void ToggleVsync();
 
-		const Event<KeyDownData>& OnKeyDownEvent() { return m_windowData.keyDownEvent; };
-		const Event<KeyUpData>& OnKeyUpEvent() { return m_windowData.keyUpEvent; };
-		const Event<KeyHoldData>& OnKeyHoldEvent() { return m_windowData.keyHoldEvent; };
+		EventDispatcher& EventDispatcher() { return m_windowData.eventDispatcher; };
 	public:
 		bool HasVsync();
 		bool HasClosed();

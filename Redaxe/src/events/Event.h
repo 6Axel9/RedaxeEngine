@@ -1,31 +1,49 @@
 #pragma once
 #include "rdxpch.h"
 
-#define Action(x) std::function<void(x)>
+#define Func(x) std::function<void(x)>
 
 namespace rdx
 {
+	enum class EventType {	KeyDown, KeyUp, KeyHold,
+							MouseDown, MouseUp, MouseHold, MouseMove, MouseScroll,
+							WindowOpened, WindowCloseed, WindowMoved, WindowResized, 
+							SceneStarted, SceceStopped,
+							Error = -1};
+
 	struct EventData
 	{
-		virtual std::string ToString() = 0;
+		virtual EventType GetType() { return EventType::Error; }
 	};
 
-	template <typename T>
 	class Event
 	{
 	public:
-		Event() {}
-		virtual~Event() {}
+		Event(EventType type, Func(EventData&) method) : method(method), type(type) = default;
+		~Event() = default;
 	public:
-		void Invoke(T params) 
+		Func(EventData&) GetMethod() { return method; }
+		EventType GetType() { return type; }
+	private:
+		Func(EventData&) method;
+		EventType type;
+	};
+
+	class EventDispatcher
+	{
+	public:
+		EventDispatcher() = default;
+		~EventDispatcher() = default;
+	public:
+		void Invoke(EventData& params)
 		{
-			spdlog::info("[Event]{0}", params.ToString());
-			for (const Action(T)& callback : m_listeners)
-			{
-				callback(params);
-			}
+			for (Event& callback : m_listeners)
+				if (params.GetType() == callback.GetType())
+					callback.GetMethod()(params);
+				else
+					continue;
 		}
-		void AddListener(const Action(T)& callback) 
+		void AddListener(const Event& callback)
 		{
 			m_listeners.emplace_back(callback); 
 		}
@@ -34,33 +52,6 @@ namespace rdx
 			m_listeners.clear(); 
 		}
 	private:
-		std::list<Action(T)> m_listeners;
-	};
-
-	template <>
-	class Event<void>
-	{
-	public:
-		Event() {}
-		virtual~Event() {}
-	public:
-		void Invoke()
-		{
-			spdlog::info("[Event] [Base]");
-			for (const Action()& callback : m_listeners)
-			{
-				callback();
-			}
-		}
-		void AddListener(const Action()& callback)
-		{
-			m_listeners.emplace_back(callback);
-		}
-		void RemoveListeners()
-		{
-			m_listeners.clear();
-		}
-	private:
-		std::list<Action()> m_listeners;
+		std::list<Event> m_listeners;
 	};
 }
