@@ -19,7 +19,7 @@ namespace rdx
 	class Event
 	{
 	public:
-		Event(EventType type, Func(EventData&) method) : method(method), type(type) = default;
+		Event(EventType type, Func(EventData&) method) : method(method), type(type) {}
 		~Event() = default;
 	public:
 		Func(EventData&) GetMethod() { return method; }
