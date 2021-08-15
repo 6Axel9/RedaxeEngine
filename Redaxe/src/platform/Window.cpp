@@ -22,7 +22,7 @@ namespace rdx
     {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         m_windowData.height = data.height;
         m_windowData.width = data.width;
@@ -34,11 +34,12 @@ namespace rdx
 
         glfwMakeContextCurrent(m_window);
         glfwSwapInterval(true);
+
+        gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     }
 
     void Window::Bind()
     {
-        gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         glfwSetWindowUserPointer(m_window, &m_windowData);
 
         glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -95,11 +96,6 @@ namespace rdx
     void Window::Update()
     {
         glfwPollEvents();
-    }
-
-    void Window::Clear()
-    {
-        glClear(GL_COLOR_BUFFER_BIT);
     }
     
     void Window::Swap()

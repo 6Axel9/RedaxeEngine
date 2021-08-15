@@ -1,5 +1,6 @@
 #pragma once
 #include "Window.h"
+#include "Interface.h"
 
 namespace rdx
 {
@@ -11,6 +12,7 @@ namespace rdx
 	public:
 		void Update();
 	private:
+		Interface* m_interface;
 		Window* m_window;
 		bool m_hasEnded;
 	};

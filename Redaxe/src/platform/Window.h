@@ -29,6 +29,7 @@ namespace rdx
 
 		EventDispatcher& Dispatcher() { return m_windowData.dispatcher; };
 	public:
+		GLFWwindow* GetWindow() { return m_window; };
 		bool HasClosed();
 	private:
 		GLFWwindow* m_window;

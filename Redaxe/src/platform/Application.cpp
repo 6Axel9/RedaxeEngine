@@ -7,24 +7,29 @@ namespace rdx
 	{
 		Log::set_pattern("[%T][%^%l%$][%v]");
 
-
+		m_interface = new Interface();
 		m_window = new Window();
+
 		m_window->Open(WindowData());
+		m_interface->Open(m_window);
 	}
 
 	Application::~Application()
 	{
+		m_interface->Close();
 		m_window->Close();
+
+		delete m_interface;
 		delete m_window;
 	}
 
 	void Application::Update()
 	{
-		m_window->Bind();
+		//m_window->Bind();
 		while (!m_window->HasClosed() && !m_hasEnded)
 		{
 			m_window->Update();
-			m_window->Clear();
+			m_interface->Update();
 			m_window->Swap();
 		}
 	}
