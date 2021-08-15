@@ -6,37 +6,32 @@ namespace rdx
 {
 	struct WindowData
 	{
-		WindowData() : isFullscreen(0), hasVsync(1), width(1280), height(720) {}
-		bool isFullscreen;
-		bool hasVsync;
+		WindowData() : name("Redaxe Engine"), width(1280), height(720) {}
+		const char* name;
 		int width;
 		int height;
 
-		EventDispatcher eventDispatcher;
+		EventDispatcher dispatcher;
 	};
 
 	class Window
 	{
 	public:
-		static int m_count;
-	public:
-		Window(const WindowData& data);
+		Window();
 		~Window();
 	public:
-		void UpdateInputs();
-		void SwapBuffer();
-		void ClearScreen();
-		void BindCallbacks();
-		void ToggleFullScreen();
-		void ToggleVsync();
+		void Open(const WindowData& data);
+		void Bind();
+		void Update();
+		void Clear();
+		void Swap();
+		void Close();
 
-		EventDispatcher& EventDispatcher() { return m_windowData.eventDispatcher; };
+		EventDispatcher& Dispatcher() { return m_windowData.dispatcher; };
 	public:
-		bool HasVsync();
 		bool HasClosed();
 	private:
 		GLFWwindow* m_window;
-		GLFWmonitor* m_monitor;
 		WindowData m_windowData;
 	};
 }

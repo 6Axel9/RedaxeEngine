@@ -8,7 +8,6 @@ workspace "Redaxe"
     {
         "Debug",
         "Release",
-        "Distro"
     }
 
 	flags
@@ -17,12 +16,13 @@ workspace "Redaxe"
 	}
 
 outputDir = "%{cfg.buildcfg}"
-outputVendorDir = "%{cfg.buildcfg}/vendor"
+outputVendorDir = "%{cfg.buildcfg}/Vendor"
 
 group "Dependencies"
     include "Redaxe/vendor/Glfw"
     include "Redaxe/vendor/Glad"
-    include "Redaxe/vendor/Spdlog"
+    include "Redaxe/vendor/SpdLog"
+    include "Redaxe/vendor/ImGui"
 group ""
 
 include "Redaxe"

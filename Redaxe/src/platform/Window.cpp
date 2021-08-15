@@ -3,111 +3,117 @@
 
 namespace rdx
 {
-    Window::Window(const WindowData& data)
-        : m_window(nullptr), m_monitor(nullptr), m_windowData()
+    Window::Window() : m_window(nullptr), m_windowData()
     {
-        if (Window::m_count == 0)
+        GLFWerrorfun errorHandler = [](int code, const char* msg)
         {
-            GLFWerrorfun errorHandler = [](int code, const char* msg)
-            {
-                std::cout << "[glfw] [" << code << "] [" << msg << "]\n";
-            };
-            
-            glfwSetErrorCallback(errorHandler);
-            glfwInit();
-        }
+            Log::error("{0} - {1}", code, msg);
+        };
+        glfwSetErrorCallback(errorHandler);
+        glfwInit();
+    }
+
+    Window::~Window()
+    {
+        glfwTerminate();
+    }
+
+    void Window::Open(const WindowData& data)
+    {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
         m_windowData.height = data.height;
         m_windowData.width = data.width;
-        m_windowData.isFullscreen = data.isFullscreen;
-        m_windowData.hasVsync = data.hasVsync;
+        m_windowData.name = data.name;
 
-        m_monitor = glfwGetPrimaryMonitor();
-        m_window = glfwCreateWindow(m_windowData.width, m_windowData.height, "Redaxe Engine", m_windowData.isFullscreen ? m_monitor : NULL, NULL);
+        m_window = glfwCreateWindow(data.width, data.height, data.name, NULL, NULL);
         if (!m_window)
-        {
-            glfwTerminate();
             return;
-        }
 
-        Window::m_count++;
         glfwMakeContextCurrent(m_window);
-        glfwSwapInterval(m_windowData.hasVsync ? 1 : 0);
-        gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        glfwSwapInterval(true);
     }
 
-    Window::~Window()
+    void Window::Bind()
     {
-        glfwDestroyWindow(m_window);
-        Window::m_count--;
+        gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        glfwSetWindowUserPointer(m_window, &m_windowData);
 
-        if(Window::m_count == 0)
-            glfwTerminate();
+        glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+            {
+                WindowData* userPtr = static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+                switch (action)
+                {
+                case GLFW_PRESS:
+                    userPtr->dispatcher.Invoke(KeyDownData(key));
+                    break;
+                case GLFW_RELEASE:
+                    userPtr->dispatcher.Invoke(KeyUpData(key));
+                    break;
+                case GLFW_REPEAT:
+                    userPtr->dispatcher.Invoke(KeyHoldData(key));
+                    break;
+                default:
+                    break;
+                }
+            });
+
+        glfwSetMouseButtonCallback(m_window, [](GLFWwindow* window, int button, int action, int mods)
+            {
+                WindowData* userPtr = static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+                switch (action)
+                {
+                case GLFW_PRESS:
+                    userPtr->dispatcher.Invoke(MouseDownData(button));
+                    break;
+                case GLFW_RELEASE:
+                    userPtr->dispatcher.Invoke(MouseUpData(button));
+                    break;
+                case GLFW_REPEAT:
+                    userPtr->dispatcher.Invoke(MouseHoldData(button));
+                    break;
+                default:
+                    break;
+                }
+            });
+
+        glfwSetScrollCallback(m_window, [](GLFWwindow* window, double xoffset, double yoffset)
+            {
+                WindowData* userPtr = static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+                userPtr->dispatcher.Invoke(MouseScrollData(xoffset, yoffset));
+            });
+
+        glfwSetCursorPosCallback(m_window, [](GLFWwindow* window, double xpos, double ypos)
+            {
+                WindowData* userPtr = static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+                userPtr->dispatcher.Invoke(MouseMoveData(xpos, ypos));
+            });
     }
 
-    void Window::UpdateInputs()
+    void Window::Update()
     {
         glfwPollEvents();
     }
 
-    void Window::ToggleFullScreen()
+    void Window::Clear()
     {
-        m_windowData.isFullscreen = !m_windowData.isFullscreen;
-        glfwSetWindowMonitor(m_window, m_windowData.isFullscreen ? m_monitor : NULL, 0, 0, m_windowData.width, m_windowData.height, GLFW_DONT_CARE);
+        glClear(GL_COLOR_BUFFER_BIT);
     }
-
-    void Window::ToggleVsync()
-    {
-        m_windowData.hasVsync = !m_windowData.hasVsync;
-        glfwSwapInterval(m_windowData.hasVsync ? 1 : 0);
-    }
-
-    void Window::SwapBuffer()
+    
+    void Window::Swap()
     {
         glfwSwapBuffers(m_window);
     }
 
-    void Window::ClearScreen()
+    void Window::Close()
     {
-        glClear(GL_COLOR_BUFFER_BIT);
-    }
-
-    void Window::BindCallbacks()
-    {
-        glfwSetWindowUserPointer(m_window, &m_windowData);
-
-        glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods) 
-        {
-            WindowData* userPtr = static_cast<WindowData*>(glfwGetWindowUserPointer(window));
-            switch (action)
-            {
-            case GLFW_PRESS:
-                userPtr->eventDispatcher.Invoke(KeyDownData(key));
-                break;
-            case GLFW_RELEASE:
-                userPtr->eventDispatcher.Invoke(KeyUpData(key));
-                break;
-            case GLFW_REPEAT:
-                userPtr->eventDispatcher.Invoke(KeyHoldData(key));
-                break;
-            default:
-                break;
-            }
-        });
-    }
-
-    bool Window::HasVsync()
-    {
-        return false;
+        glfwDestroyWindow(m_window);
     }
 
     bool Window::HasClosed()
     {
         return glfwWindowShouldClose(m_window);
     }
-
-    int Window::m_count = 0;
 }

@@ -14,6 +14,6 @@ namespace rdx
 		Window* m_window;
 		bool m_hasEnded;
 	};
-
+	
 	Application* CreateApp();
 }

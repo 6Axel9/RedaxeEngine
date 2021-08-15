@@ -3,40 +3,29 @@
 
 namespace rdx
 {
-	Application::Application() 
-		: m_window(0), m_hasEnded(0)
+	Application::Application() : m_window(0), m_hasEnded(0)
 	{
-		spdlog::set_pattern("[%H:%M:%S][%^%l%$] %v");
+		Log::set_pattern("[%T][%^%l%$][%v]");
 
-		m_window = new Window(WindowData());
 
-		Event onKeyDown(EventType::KeyDown, [](EventData& data)
-		{
-			std::cout << "Down" << std::endl;
-		});
-		Event onKeyUp(EventType::KeyUp, [](EventData& data)
-		{
-				KeyUpData& ref = dynamic_cast<KeyUpData&>(data);
-			std::cout << ref.key << std::endl;
-		});
-
-		m_window->EventDispatcher().AddListener(onKeyDown);
-		m_window->EventDispatcher().AddListener(onKeyUp);
+		m_window = new Window();
+		m_window->Open(WindowData());
 	}
 
 	Application::~Application()
 	{
+		m_window->Close();
 		delete m_window;
 	}
 
 	void Application::Update()
 	{
-		m_window->BindCallbacks();
+		m_window->Bind();
 		while (!m_window->HasClosed() && !m_hasEnded)
 		{
-			m_window->UpdateInputs();
-			m_window->ClearScreen();
-			m_window->SwapBuffer();
+			m_window->Update();
+			m_window->Clear();
+			m_window->Swap();
 		}
 	}
 }

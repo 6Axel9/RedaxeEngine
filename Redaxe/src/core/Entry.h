@@ -6,7 +6,7 @@
 
 	int main()
 	{
-		auto app = rdx::CreateApp();
+		rdx::Application* app = rdx::CreateApp();
 		app->Update();
 		delete app;
 	}

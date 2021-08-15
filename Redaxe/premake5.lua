@@ -30,30 +30,25 @@ project "Redaxe"
         "src",
         "%{IncludeDir.glad}",
         "%{IncludeDir.glfw}",
-        "%{IncludeDir.spdlog}"
+        "%{IncludeDir.spdlog}", 
+        "%{IncludeDir.imgui}"
     }
 
     links
 	{
 		"Glfw",
         "Glad",
-        "Spdlog"
+        "SpdLog",
+        "ImGui"
     }
 
     filter "system:windows"
         systemversion "latest"
 
     filter "configurations:Debug"
-        defines "RDX_DEBUG"
 		runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
-        defines "RDX_RELEASE"
-        runtime "Release"
-        optimize "On"
-
-    filter "configurations:Distro"
-        defines "RDX_DISTRO"
         runtime "Release"
         optimize "On"

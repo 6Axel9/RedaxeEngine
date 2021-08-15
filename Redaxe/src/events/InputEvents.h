@@ -14,12 +14,10 @@ namespace rdx
 
 	struct MouseEvent : EventData
 	{
-		MouseEvent() : deltaX(0), deltaY(0), scroll(0), x(0), y(0), key(0) {}
-		int deltaX;
-		int deltaY;
-		int scroll;
-		int x, y;
-		int key;
+		MouseEvent() : scrollX(0), scrollY(0), posX(0), posY(0), button(0) {}
+		double scrollX, scrollY;
+		double posX, posY;
+		int button;
 	};
 
 	struct KeyDownData : KeyEvent
@@ -42,36 +40,38 @@ namespace rdx
 
 	struct MouseDownData : MouseEvent
 	{
-		MouseDownData(int key) { this->key = key; }
+		MouseDownData(int button) { this->button = button; }
 		Event_Type(EventType::MouseDown)
 	};
 
 	struct MouseUpData : MouseEvent
 	{
-		MouseUpData(int key) { this->key = key; }
+		MouseUpData(int button) { this->button = button; }
 		Event_Type(EventType::MouseUp)
 	};
 
 	struct MouseHoldData : MouseEvent
 	{
-		MouseHoldData(int key) { this->key = key; }
+		MouseHoldData(int button) { this->button = button; }
 		Event_Type(EventType::MouseHold)
 	};
 
 	struct MouseScrollData : MouseEvent
 	{
-		MouseScrollData(int scroll) { this->scroll = scroll; }
+		MouseScrollData(double scrollX, double scrollY)
+		{
+			this->scrollX = scrollX;
+			this->scrollY = scrollY;
+		}
 		Event_Type(EventType::MouseScroll)
 	};
 
 	struct MouseMoveData : MouseEvent
 	{
-		MouseMoveData(int deltaX, int deltaY, int x, int y)
+		MouseMoveData(double posX, double posY)
 		{
-			this->deltaX = deltaX;
-			this->deltaY = deltaY;
-			this->x = x;
-			this->y = y;
+			this->posX = posX;
+			this->posY = posY;
 		}
 		Event_Type(EventType::MouseMove)
 	};
