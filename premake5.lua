@@ -23,6 +23,7 @@ group "Dependencies"
     include "Redaxe/vendor/Glad"
     include "Redaxe/vendor/SpdLog"
     include "Redaxe/vendor/ImGui"
+    include "Redaxe/vendor/Glm"
 group ""
 
 include "Redaxe"

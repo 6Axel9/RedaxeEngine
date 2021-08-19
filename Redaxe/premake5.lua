@@ -31,7 +31,8 @@ project "Redaxe"
         "%{IncludeDir.glad}",
         "%{IncludeDir.glfw}",
         "%{IncludeDir.spdlog}", 
-        "%{IncludeDir.imgui}"
+        "%{IncludeDir.imgui}",   
+        "%{IncludeDir.glm}"
     }
 
     links
@@ -39,7 +40,8 @@ project "Redaxe"
 		"Glfw",
         "Glad",
         "SpdLog",
-        "ImGui"
+        "ImGui",
+        "Glm"
     }
 
     filter "system:windows"

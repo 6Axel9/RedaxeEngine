@@ -23,6 +23,8 @@
 #include "glfw/glfw3.h"
 #include "spdlog/spdlog.h"
 #include "imgui.h"
+#include "glm.hpp"
 
 #define Log spdlog
+#define Gui ImGui
 #define Math glm
