@@ -34,12 +34,12 @@ namespace rdx
 
         glfwMakeContextCurrent(m_window);
         glfwSwapInterval(true);
-
-        gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        Bind();
     }
 
     void Window::Bind()
     {
+        gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         glfwSetWindowUserPointer(m_window, &m_windowData);
 
         glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)

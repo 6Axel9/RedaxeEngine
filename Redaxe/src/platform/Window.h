@@ -19,9 +19,10 @@ namespace rdx
 	public:
 		Window();
 		~Window();
+	private:
+		void Bind();
 	public:
 		void Open(const WindowData& data);
-		void Bind();
 		void Update();
 		void Clear();
 		void Swap();

@@ -8,7 +8,7 @@ namespace rdx
 	enum class EventType {	KeyDown, KeyUp, KeyHold,
 							MouseDown, MouseUp, MouseHold, MouseMove, MouseScroll,
 							WindowOpened, WindowCloseed, WindowMoved, WindowResized, 
-							SceneStarted, SceceStopped,
+							SceneStarted, SceneStopped,
 							Error = -1};
 
 	struct EventData

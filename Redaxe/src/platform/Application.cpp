@@ -10,6 +10,11 @@ namespace rdx
 		m_interface = new Interface();
 		m_window = new Window();
 
+		m_window->Dispatcher().AddListener(Event(EventType::KeyUp, [](EventData data)
+		{
+			Log::info("Up");
+		}));
+
 		m_window->Open(WindowData());
 		m_interface->Open(m_window);
 	}
@@ -25,7 +30,6 @@ namespace rdx
 
 	void Application::Update()
 	{
-		//m_window->Bind();
 		while (!m_window->HasClosed() && !m_hasEnded)
 		{
 			m_window->Update();
